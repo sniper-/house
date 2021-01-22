@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizPostponeMapper">
+    
+    <resultMap type="BizPostpone" id="BizPostponeResult">
+        <result property="id"    column="id"    />
+        <result property="postponeNo"    column="postpone_no"    />
+        <result property="reportNo"    column="report_no"    />
+        <result property="applicationTime"    column="application_time"    />
+        <result property="checkStatus"    column="check_status"    />
+        <result property="checkTime"    column="check_time"    />
+        <result property="addDays"    column="add_days"    />
+        <result property="originalReportTime"    column="original_report_time"    />
+        <result property="newReportTime"    column="new_report_time"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBizPostponeVo">
+        select id, postpone_no, report_no, application_time, check_status, check_time, add_days, original_report_time, new_report_time, status, create_by, create_time, update_by, update_time, remark from biz_postpone
+    </sql>
+
+    <select id="selectBizPostponeList" parameterType="BizPostpone" resultMap="BizPostponeResult">
+        <include refid="selectBizPostponeVo"/>
+        <where>  
+            <if test="postponeNo != null  and postponeNo != ''"> and postpone_no = #{postponeNo}</if>
+            <if test="reportNo != null  and reportNo != ''"> and report_no = #{reportNo}</if>
+            <if test="applicationTime != null "> and application_time = #{applicationTime}</if>
+            <if test="checkStatus != null  and checkStatus != ''"> and check_status = #{checkStatus}</if>
+            <if test="checkTime != null "> and check_time = #{checkTime}</if>
+            <if test="addDays != null "> and add_days = #{addDays}</if>
+            <if test="originalReportTime != null "> and original_report_time = #{originalReportTime}</if>
+            <if test="newReportTime != null "> and new_report_time = #{newReportTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectNotApproveData" parameterType="String" resultMap="BizPostponeResult">
+        <include refid="selectBizPostponeVo"/>
+        where report_no = #{reportNo} and check_status = 0
+    </select>
+    
+    <select id="selectBizPostponeById" parameterType="Integer" resultMap="BizPostponeResult">
+        <include refid="selectBizPostponeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBizPostpone" parameterType="BizPostpone" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_postpone
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="postponeNo != null and postponeNo != ''">postpone_no,</if>
+            <if test="reportNo != null and reportNo != ''">report_no,</if>
+            <if test="applicationTime != null">application_time,</if>
+            <if test="checkStatus != null and checkStatus != ''">check_status,</if>
+            <if test="checkTime != null">check_time,</if>
+            <if test="addDays != null">add_days,</if>
+            <if test="originalReportTime != null">original_report_time,</if>
+            <if test="newReportTime != null">new_report_time,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="postponeNo != null and postponeNo != ''">#{postponeNo},</if>
+            <if test="reportNo != null and reportNo != ''">#{reportNo},</if>
+            <if test="applicationTime != null">#{applicationTime},</if>
+            <if test="checkStatus != null and checkStatus != ''">#{checkStatus},</if>
+            <if test="checkTime != null">#{checkTime},</if>
+            <if test="addDays != null">#{addDays},</if>
+            <if test="originalReportTime != null">#{originalReportTime},</if>
+            <if test="newReportTime != null">#{newReportTime},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizPostpone" parameterType="BizPostpone">
+        update biz_postpone
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="postponeNo != null and postponeNo != ''">postpone_no = #{postponeNo},</if>
+            <if test="reportNo != null and reportNo != ''">report_no = #{reportNo},</if>
+            <if test="applicationTime != null">application_time = #{applicationTime},</if>
+            <if test="checkStatus != null and checkStatus != ''">check_status = #{checkStatus},</if>
+            <if test="checkTime != null">check_time = #{checkTime},</if>
+            <if test="addDays != null">add_days = #{addDays},</if>
+            <if test="originalReportTime != null">original_report_time = #{originalReportTime},</if>
+            <if test="newReportTime != null">new_report_time = #{newReportTime},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizPostponeById" parameterType="Integer">
+        delete from biz_postpone where id = #{id}
+    </delete>
+
+    <delete id="deleteBizPostponeByIds" parameterType="String">
+        delete from biz_postpone where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

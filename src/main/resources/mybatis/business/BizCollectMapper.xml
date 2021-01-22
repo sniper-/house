@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizCollectMapper">
+    
+    <resultMap type="BizCollect" id="BizCollectResult">
+        <result property="id"    column="id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="date"    column="date"    />
+        <result property="reportNum"    column="report_num"    />
+        <result property="visitNum"    column="visit_num"    />
+        <result property="settledNum"    column="settled_num"    />
+        <result property="unsettledNum"    column="unsettled_num"    />
+        <result property="monthSettledNum"    column="month_settled_num"    />
+        <result property="monthSettledAmount"    column="month_settled_amount"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBizCollectVo">
+        select id, project_id, date, report_num, visit_num, settled_num, unsettled_num, month_settled_num, month_settled_amount, status, create_by, create_time, update_by, update_time, remark from biz_collect
+    </sql>
+
+    <select id="selectBizCollectList" parameterType="BizCollect" resultMap="BizCollectResult">
+        <include refid="selectBizCollectVo"/>
+        <where>  
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="date != null  and date != ''"> and date = #{date}</if>
+            <if test="reportNum != null "> and report_num = #{reportNum}</if>
+            <if test="visitNum != null "> and visit_num = #{visitNum}</if>
+            <if test="settledNum != null "> and settled_num = #{settledNum}</if>
+            <if test="unsettledNum != null "> and unsettled_num = #{unsettledNum}</if>
+            <if test="monthSettledNum != null "> and month_settled_num = #{monthSettledNum}</if>
+            <if test="monthSettledAmount != null "> and month_settled_amount = #{monthSettledAmount}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBizCollectById" parameterType="Integer" resultMap="BizCollectResult">
+        <include refid="selectBizCollectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBizCollect" parameterType="BizCollect" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_collect
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null and projectId != ''">project_id,</if>
+            <if test="date != null and date != ''">date,</if>
+            <if test="reportNum != null">report_num,</if>
+            <if test="visitNum != null">visit_num,</if>
+            <if test="settledNum != null">settled_num,</if>
+            <if test="unsettledNum != null">unsettled_num,</if>
+            <if test="monthSettledNum != null">month_settled_num,</if>
+            <if test="monthSettledAmount != null">month_settled_amount,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null and projectId != ''">#{projectId},</if>
+            <if test="date != null and date != ''">#{date},</if>
+            <if test="reportNum != null">#{reportNum},</if>
+            <if test="visitNum != null">#{visitNum},</if>
+            <if test="settledNum != null">#{settledNum},</if>
+            <if test="unsettledNum != null">#{unsettledNum},</if>
+            <if test="monthSettledNum != null">#{monthSettledNum},</if>
+            <if test="monthSettledAmount != null">#{monthSettledAmount},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizCollect" parameterType="BizCollect">
+        update biz_collect
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null and projectId != ''">project_id = #{projectId},</if>
+            <if test="date != null and date != ''">date = #{date},</if>
+            <if test="reportNum != null">report_num = #{reportNum},</if>
+            <if test="visitNum != null">visit_num = #{visitNum},</if>
+            <if test="settledNum != null">settled_num = #{settledNum},</if>
+            <if test="unsettledNum != null">unsettled_num = #{unsettledNum},</if>
+            <if test="monthSettledNum != null">month_settled_num = #{monthSettledNum},</if>
+            <if test="monthSettledAmount != null">month_settled_amount = #{monthSettledAmount},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizCollectById" parameterType="Integer">
+        delete from biz_collect where id = #{id}
+    </delete>
+
+    <delete id="deleteBizCollectByIds" parameterType="String">
+        delete from biz_collect where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAllReportCount" parameterType="com.house.project.business.domain.BizReport" resultType="Integer">
+        select count(1) from biz_report
+        WHERE date_format( report_time, '%y%m' ) = date_format( CURRENT_DATE, '%y%m' )
+        <include refid="where_if1"/>
+    </select>
+
+    <select id="selectAllYearReportCount" resultType="Integer" parameterType="com.house.project.business.domain.BizReport">
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'01'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'02'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'03'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'04'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'05'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'06'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'07'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'08'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'09'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'10'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'11'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+        UNION all
+        SELECT count(1) FROM biz_report WHERE date_format( report_time, '%y%m' ) = date_format(STR_TO_DATE(CONCAT(#{tempValue},'12'),'%Y%m'), '%y%m') <include refid="where_if1"/>
+    </select>
+
+
+    <select id="selectMonthDealNum" parameterType="com.house.project.business.domain.BizReport" resultType="Integer">
+        SELECT count(1) FROM biz_houses WHERE
+        date_format( deal_date, '%y%m' ) = date_format( CURRENT_DATE, '%y%m' )
+        AND id IN (
+        SELECT purchased_houses_id FROM biz_report WHERE
+        `status` = '0'
+        <include refid="where_if"/>
+        )
+    </select>
+
+    <select id="selectAllYearDealNum" resultType="Integer" parameterType="com.house.project.business.domain.BizReport">
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'01'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'02'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'03'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'04'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'05'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'06'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'07'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'08'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'09'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'10'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'11'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'12'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+    </select>
+
+    <select id="selectMonthVisitNum" parameterType="com.house.project.business.domain.BizReport" resultType="Integer">
+        SELECT count(1) FROM biz_reception_log WHERE
+        date_format( reception_time, '%y%m' ) = date_format( CURRENT_DATE, '%y%m' )
+        AND report_no IN (
+        SELECT report_no FROM biz_report WHERE
+        `status` = '0'
+        <include refid="where_if1"/>
+        )
+    </select>
+
+    <select id="selectAllYearVisitNum" resultType="Integer" parameterType="com.house.project.business.domain.BizReport">
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'01'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'02'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'03'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'04'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'05'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'06'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'07'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'08'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'09'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'10'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'11'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+        UNION all
+        SELECT count(1) FROM biz_reception_log WHERE date_format(reception_time, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'12'),'%Y%m'), '%y%m') AND
+        report_no IN (SELECT report_no FROM biz_report WHERE `status` = '0' <include refid="where_if1"/>) and `status` = '0'
+    </select>
+
+    <select id="selectMonthDealAmt" parameterType="com.house.project.business.domain.BizReport" resultType="decimal">
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE
+        date_format( deal_date, '%y%m' ) = date_format( CURRENT_DATE, '%y%m' )
+        AND id IN (
+        SELECT purchased_houses_id FROM biz_report WHERE
+        `status` = '0'
+        <include refid="where_if"/>
+        )
+    </select>
+
+    <select id="selectAllYearDealAmt" resultType="decimal" parameterType="com.house.project.business.domain.BizReport">
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'01'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'02'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'03'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'04'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'05'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'06'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+        UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'07'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+         UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'08'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+         UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'09'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+		 UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'10'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+         UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'11'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+         UNION all
+        SELECT IF(SUM(deal_price) is null, 0, SUM(deal_price)) FROM biz_houses WHERE date_format(deal_date, '%y%m') = date_format(STR_TO_DATE(CONCAT(#{tempValue},'12'),'%Y%m'), '%y%m') AND
+        id IN (SELECT purchased_houses_id FROM biz_report WHERE `status` = '0' <include refid="where_if"/>) and `status` = '0'
+    </select>
+
+    <sql id="where_if">
+        <if test="serviceProviderId != null and serviceProviderId != 0">and service_provider_id = #{serviceProviderId}</if>
+        <if test="purchasedProjectId != null "> and purchased_project_id = #{purchasedProjectId}</if>
+    </sql>
+
+    <sql id="where_if1">
+        <if test="serviceProviderId != null and serviceProviderId != 0">and service_provider_id = #{serviceProviderId}</if>
+        <if test="purchasedProjectId != null "> and intention_project_id = #{purchasedProjectId}</if>
+    </sql>
+
+
+</mapper>

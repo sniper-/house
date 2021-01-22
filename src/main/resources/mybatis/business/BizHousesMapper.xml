@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizHousesMapper">
+
+    <resultMap type="BizHouses" id="BizHousesResult">
+        <result property="id"    column="id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectHouseTypeId"    column="project_house_type_id"    />
+        <result property="houseArea"    column="house_area"    />
+        <result property="floorNo"    column="floor_no"    />
+        <result property="unitNo"    column="unit_no"    />
+        <result property="storeyNo"    column="storey_no"    />
+        <result property="houseNo"    column="house_no"    />
+        <result property="features"    column="features"    />
+        <result property="housesStatus"    column="houses_status"    />
+        <result property="originalPrice"    column="original_price"    />
+        <result property="adjustPrice"    column="adjust_price"    />
+        <result property="discount"    column="discount"    />
+        <result property="dealPrice"    column="deal_price"    />
+        <result property="dealDate"    column="deal_date"    />
+        <result property="offerDescription"    column="offer_description"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="com.house.project.business.domain.vo.BizHousesVo" id="BizHousesVoResult">
+        <result property="id"    column="id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="projectHouseTypeId"    column="project_house_type_id"    />
+        <result property="houseArea"    column="house_area"    />
+        <result property="floorNo"    column="floor_no"    />
+        <result property="unitNo"    column="unit_no"    />
+        <result property="storeyNo"    column="storey_no"    />
+        <result property="houseNo"    column="house_no"    />
+        <result property="features"    column="features"    />
+        <result property="housesStatus"    column="houses_status"    />
+        <result property="originalPrice"    column="original_price"    />
+        <result property="adjustPrice"    column="adjust_price"    />
+        <result property="discount"    column="discount"    />
+        <result property="dealPrice"    column="deal_price"    />
+        <result property="dealDate"    column="deal_date"    />
+        <result property="offerDescription"    column="offer_description"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projectHouseName"    column="projectHouseName"    />
+        <result property="projectName"    column="projectName"    />
+    </resultMap>
+
+    <sql id="selectBizHousesVo">
+        select id, project_id, project_house_type_id, house_area, floor_no, unit_no, storey_no, house_no,
+        features, houses_status, original_price, adjust_price, discount, deal_price, deal_date, offer_description, status,
+        create_by, create_time, update_by, update_time, remark from biz_houses
+    </sql>
+
+    <sql id="selectBizHousesDetailVo">
+        select h.id, h.project_id, h.project_house_type_id, h.house_area, h.floor_no, h.unit_no,
+            h.storey_no, h.house_no, h.features, h.houses_status, h.original_price, h.adjust_price,
+            h.discount, h.deal_price, h.deal_date, h.offer_description, h.status, h.create_by,
+            h.create_time, h.update_by, h.update_time, h.remark,
+            p.project_name projectName, t.project_house_name projectHouseName
+        from biz_houses h
+        left join biz_project p on h.project_id = p.id and p.`status` = '0'
+        left join biz_project_house_type t on h.project_house_type_id = t.id and t.`status` = '0'
+    </sql>
+
+    <select id="selectBizHousesList" parameterType="BizHouses" resultMap="BizHousesVoResult">
+        <include refid="selectBizHousesDetailVo"/>
+        <where>  
+            <if test="projectId != null "> and h.project_id = #{projectId}</if>
+            <if test="projectHouseTypeId != null  and projectHouseTypeId != ''"> and h.project_house_type_id = #{projectHouseTypeId}</if>
+            <if test="houseArea != null "> and h.house_area = #{houseArea}</if>
+            <if test="floorNo != null  and floorNo != ''"> and h.floor_no = #{floorNo}</if>
+            <if test="unitNo != null  and unitNo != ''"> and h.unit_no = #{unitNo}</if>
+            <if test="storeyNo != null  and storeyNo != ''"> and h.storey_no = #{storeyNo}</if>
+            <if test="houseNo != null  and houseNo != ''"> and h.house_no = #{houseNo}</if>
+            <if test="features != null  and features != ''"> and h.features = #{features}</if>
+            <if test="housesStatus != null  and housesStatus != ''"> and h.houses_status = #{housesStatus}</if>
+            <if test="originalPrice != null "> and h.original_price = #{originalPrice}</if>
+            <if test="adjustPrice != null "> and h.adjust_price = #{adjustPrice}</if>
+            <if test="discount != null  and discount != ''"> and h.discount = #{discount}</if>
+            <if test="dealPrice != null "> and h.deal_price = #{dealPrice}</if>
+            <if test="dealDate != null "> and h.deal_date = #{dealDate}</if>
+            <if test="offerDescription != null  and offerDescription != ''"> and h.offer_description = #{offerDescription}</if>
+            <if test="status != null  and status != ''"> and h.status = #{status}</if>
+            <if test="heightPrice != null "> and h.deal_price  <![CDATA[ <= ]]> #{heightPrice}</if>
+            <if test="lowPrice != null "> and h.deal_price >= #{lowPrice}</if>
+        </where>
+    </select>
+    
+    <select id="selectBizHousesById" parameterType="Integer" resultMap="BizHousesVoResult">
+        <include refid="selectBizHousesDetailVo"/>
+        where h.id = #{id}
+    </select>
+        
+    <insert id="insertBizHouses" parameterType="BizHouses">
+        insert into biz_houses
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="projectHouseTypeId != null and projectHouseTypeId != ''">project_house_type_id,</if>
+            <if test="houseArea != null">house_area,</if>
+            <if test="floorNo != null">floor_no,</if>
+            <if test="unitNo != null">unit_no,</if>
+            <if test="storeyNo != null">storey_no,</if>
+            <if test="houseNo != null">house_no,</if>
+            <if test="features != null">features,</if>
+            <if test="housesStatus != null and housesStatus != ''">houses_status,</if>
+            <if test="originalPrice != null">original_price,</if>
+            <if test="adjustPrice != null">adjust_price,</if>
+            <if test="discount != null">discount,</if>
+            <if test="dealPrice != null">deal_price,</if>
+            <if test="dealDate != null">deal_date,</if>
+            <if test="offerDescription != null">offer_description,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="projectHouseTypeId != null and projectHouseTypeId != ''">#{projectHouseTypeId},</if>
+            <if test="houseArea != null">#{houseArea},</if>
+            <if test="floorNo != null">#{floorNo},</if>
+            <if test="unitNo != null">#{unitNo},</if>
+            <if test="storeyNo != null">#{storeyNo},</if>
+            <if test="houseNo != null">#{houseNo},</if>
+            <if test="features != null">#{features},</if>
+            <if test="housesStatus != null and housesStatus != ''">#{housesStatus},</if>
+            <if test="originalPrice != null">#{originalPrice},</if>
+            <if test="adjustPrice != null">#{adjustPrice},</if>
+            <if test="discount != null">#{discount},</if>
+            <if test="dealPrice != null">#{dealPrice},</if>
+            <if test="dealDate != null">#{dealDate},</if>
+            <if test="offerDescription != null">#{offerDescription},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizHouses" parameterType="BizHouses">
+        update biz_houses
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="projectHouseTypeId != null and projectHouseTypeId != ''">project_house_type_id = #{projectHouseTypeId},</if>
+            <if test="houseArea != null">house_area = #{houseArea},</if>
+            <if test="floorNo != null">floor_no = #{floorNo},</if>
+            <if test="unitNo != null">unit_no = #{unitNo},</if>
+            <if test="storeyNo != null">storey_no = #{storeyNo},</if>
+            <if test="houseNo != null">house_no = #{houseNo},</if>
+            <if test="features != null">features = #{features},</if>
+            <if test="housesStatus != null and housesStatus != ''">houses_status = #{housesStatus},</if>
+            <if test="originalPrice != null">original_price = #{originalPrice},</if>
+            <if test="adjustPrice != null">adjust_price = #{adjustPrice},</if>
+            <if test="discount != null">discount = #{discount},</if>
+            <if test="dealPrice != null">deal_price = #{dealPrice},</if>
+            <if test="dealDate != null">deal_date = #{dealDate},</if>
+            <if test="offerDescription != null">offer_description = #{offerDescription},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizHousesById" parameterType="Integer">
+        delete from biz_houses where id = #{id}
+    </delete>
+
+    <delete id="deleteBizHousesByIds" parameterType="String">
+        delete from biz_houses where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

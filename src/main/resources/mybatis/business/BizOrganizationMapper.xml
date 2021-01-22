@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizOrganizationMapper">
+    
+    <resultMap type="com.house.project.business.domain.vo.BizOrganizationVo" id="BizOrganizationResult">
+        <result property="id"    column="id"    />
+        <result property="organizationCode"    column="organization_code"    />
+        <result property="organizationType"    column="organization_type"    />
+        <result property="organizationName"    column="organization_name"    />
+        <result property="organizationAddress"    column="organization_address"    />
+        <result property="organizationPhone"    column="organization_phone"    />
+        <result property="organizationAddressLongitude"    column="organization_address_longitude"    />
+        <result property="organizationAddressLatitude"    column="organization_address_latitude"    />
+        <result property="organizationStatus"    column="organization_status"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="channelSysUser"    column="channelSysUser"    />
+    </resultMap>
+
+    <sql id="selectBizOrganizationVo">
+        select o.id, o.organization_code, o.organization_type, o.organization_name, o.organization_address, o.organization_phone,
+                o.organization_address_longitude, o.organization_address_latitude,
+                o.organization_status, o.status, o.create_by, o.create_time, o.update_by, o.update_time, o.remark
+        from biz_organization o
+    </sql>
+
+    <select id="selectBizOrganizationList" parameterType="BizOrganization" resultMap="BizOrganizationResult">
+        <include refid="selectBizOrganizationVo"/>
+        <where>  
+            <if test="organizationCode != null  and organizationCode != ''"> and o.organization_code = #{organizationCode}</if>
+            <if test="organizationType != null  and organizationType != ''"> and o.organization_type = #{organizationType}</if>
+            <if test="organizationName != null  and organizationName != ''"> and o.organization_name like concat('%', #{organizationName}, '%')</if>
+            <if test="organizationAddress != null  and organizationAddress != ''"> and o.organization_address = #{organizationAddress}</if>
+            <if test="organizationPhone != null  and organizationPhone != ''"> and o.organization_phone = #{organizationPhone}</if>
+            <if test="organizationAddressLongitude != null  and organizationAddressLongitude != ''"> and o.organization_address_longitude = #{organizationAddressLongitude}</if>
+            <if test="organizationAddressLatitude != null  and organizationAddressLatitude != ''"> and o.organization_address_latitude = #{organizationAddressLatitude}</if>
+            <if test="organizationStatus != null  and organizationStatus != ''"> and o.organization_status = #{organizationStatus}</if>
+            <if test="status != null  and status != ''"> and o.status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectBizOrganizationById" parameterType="Integer" resultMap="BizOrganizationResult">
+        <include refid="selectBizOrganizationVo"/>
+        where o.id = #{id}
+    </select>
+
+    <select id="selectBizOrganizationByCode" parameterType="String" resultMap="BizOrganizationResult">
+        <include refid="selectBizOrganizationVo"/>
+        where o.organization_code = #{organizationCode}
+    </select>
+        
+    <insert id="insertBizOrganization" parameterType="BizOrganization" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_organization
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="organizationType != null and organizationType != ''">organization_code,</if>
+            <if test="organizationType != null and organizationType != ''">organization_type,</if>
+            <if test="organizationName != null and organizationName != ''">organization_name,</if>
+            <if test="organizationAddress != null and organizationAddress != ''">organization_address,</if>
+            <if test="organizationPhone != null and organizationPhone != ''">organization_phone,</if>
+            <if test="organizationAddressLongitude != null and organizationAddressLongitude != ''">organization_address_longitude,</if>
+            <if test="organizationAddressLatitude != null and organizationAddressLatitude != ''">organization_address_latitude,</if>
+            <if test="organizationStatus != null and organizationStatus != ''">organization_status,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="organizationType != null and organizationType != ''">
+                case #{organizationType}
+                when '1' then CONCAT('Z','_',lpad((SELECT id FROM (SELECT MAX(id) + 1 as id FROM biz_organization) as t),9,0))
+                when '2' then CONCAT('F','_',lpad((SELECT id FROM (SELECT MAX(id) + 1 as id FROM biz_organization) as t),9,0)) end,
+            </if>
+            <if test="organizationType != null and organizationType != ''">#{organizationType},</if>
+            <if test="organizationName != null and organizationName != ''">#{organizationName},</if>
+            <if test="organizationAddress != null and organizationAddress != ''">#{organizationAddress},</if>
+            <if test="organizationPhone != null and organizationPhone != ''">#{organizationPhone},</if>
+            <if test="organizationAddressLongitude != null and organizationAddressLongitude != ''">#{organizationAddressLongitude},</if>
+            <if test="organizationAddressLatitude != null and organizationAddressLatitude != ''">#{organizationAddressLatitude},</if>
+            <if test="organizationStatus != null and organizationStatus != ''">#{organizationStatus},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizOrganization" parameterType="BizOrganization">
+        update biz_organization
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="organizationCode != null and organizationCode != ''">organization_code = #{organizationCode},</if>
+            <if test="organizationType != null and organizationType != ''">organization_type = #{organizationType},</if>
+            <if test="organizationName != null and organizationName != ''">organization_name = #{organizationName},</if>
+            <if test="organizationAddress != null">organization_address = #{organizationAddress},</if>
+            <if test="organizationPhone != null">organization_phone = #{organizationPhone},</if>
+            <if test="organizationAddressLongitude != null">organization_address_longitude = #{organizationAddressLongitude},</if>
+            <if test="organizationAddressLatitude != null">organization_address_latitude = #{organizationAddressLatitude},</if>
+            <if test="organizationStatus != null and organizationStatus != ''">organization_status = #{organizationStatus},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizOrganizationById" parameterType="Integer">
+        delete from biz_organization where id = #{id}
+    </delete>
+
+    <delete id="deleteBizOrganizationByIds" parameterType="String">
+        delete from biz_organization where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateBizOrganizationDelStatus" parameterType="String">
+        update biz_organization set status = 1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    
+</mapper>

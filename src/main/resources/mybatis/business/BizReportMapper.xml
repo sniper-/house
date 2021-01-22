@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizReportMapper">
+
+    <resultMap type="BizReport" id="BizReportResult">
+        <result property="id"    column="id"    />
+        <result property="reportNo"    column="report_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="customerPhone"    column="customer_phone"    />
+        <result property="customerBackupPhone"    column="customer_backup_phone"    />
+        <result property="customerBackupPhone3"    column="customer_backup_phone3"    />
+        <result property="intentionProjectId"    column="intention_project_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="intentionHouses"    column="intention_houses"    />
+        <result property="purchasedProjectId"    column="purchased_project_id"    />
+        <result property="purchasedHousesId"    column="purchased_houses_id"    />
+        <result property="middlemanUserId"    column="middleman_user_id"    />
+        <result property="reportTime"    column="report_time"    />
+        <result property="appointmentTime"    column="appointment_time"    />
+        <result property="reportValidityTime"    column="report_validity_time"    />
+        <result property="consultantUserId"    column="consultant_user_id"    />
+        <result property="channelSysUserId"    column="channel_sys_user_id"    />
+        <result property="serviceProviderId"    column="service_provider_id"    />
+        <result property="firstVisitTime"    column="first_visit_time"    />
+        <result property="visitTimes"    column="visit_times"    />
+        <result property="customerRating"    column="customer_rating"    />
+        <result property="postponeStatus"    column="postpone_status"    />
+        <result property="reportStatus"    column="report_status"    />
+        <result property="validStatus"    column="valid_status"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="com.house.project.business.domain.vo.BizReportVo" id="BizReportVoResult">
+        <result property="id"    column="id"    />
+        <result property="reportNo"    column="report_no"    />
+        <result property="userId"    column="user_id"    />
+        <result property="customerName"    column="customer_name"    />
+        <result property="customerPhone"    column="customer_phone"    />
+        <result property="customerBackupPhone"    column="customer_backup_phone"    />
+        <result property="customerBackupPhone3"    column="customer_backup_phone3"    />
+        <result property="intentionProjectId"    column="intention_project_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="intentionHouses"    column="intention_houses"    />
+        <result property="purchasedProjectId"    column="purchased_project_id"    />
+        <result property="purchasedHousesId"    column="purchased_houses_id"    />
+        <result property="middlemanUserId"    column="middleman_user_id"    />
+        <result property="reportTime"    column="report_time"    />
+        <result property="appointmentTime"    column="appointment_time"    />
+        <result property="reportValidityTime"    column="report_validity_time"    />
+        <result property="consultantUserId"    column="consultant_user_id"    />
+        <result property="channelSysUserId"    column="channel_sys_user_id"    />
+        <result property="serviceProviderId"    column="service_provider_id"    />
+        <result property="firstVisitTime"    column="first_visit_time"    />
+        <result property="visitTimes"    column="visit_times"    />
+        <result property="customerRating"    column="customer_rating"    />
+        <result property="postponeStatus"    column="postpone_status"    />
+        <result property="reportStatus"    column="report_status"    />
+        <result property="validStatus"    column="valid_status"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="intentionProject"    column="intentionProject"    />
+        <result property="deptName"    column="deptName"    />
+        <result property="middlemanName"    column="middlemanName"    />
+        <result property="middlemanCompany"    column="middlemanCompany"    />
+        <result property="middlemanPhone"    column="middlemanPhone"    />
+        <result property="consultantName"    column="consultantName"    />
+        <result property="purchasedProject"    column="purchasedProject"    />
+        <result property="purchasedHouses"    column="purchasedHouses"    />
+        <result property="floorNo"    column="floor_no"    />
+        <result property="unitNo"    column="unit_no"    />
+        <result property="storeyNo"    column="storey_no"    />
+        <result property="houseNo"    column="house_no"    />
+    </resultMap>
+
+    <sql id="selectBizReportVo">
+        select
+            r.id, r.report_no, r.user_id, r.customer_name, r.customer_phone, r.customer_backup_phone, r.customer_backup_phone3,
+            r.intention_project_id, r.dept_id,
+            r.intention_houses, r.purchased_project_id, r.purchased_houses_id, r.middleman_user_id, r.report_time,
+            r.appointment_time, r.report_validity_time, r.consultant_user_id, r.channel_sys_user_id, r.service_provider_id, r.first_visit_time, r.visit_times,
+            r.customer_rating, r.postpone_status, r.report_status, valid_status, r.status, r.create_by, r.create_time,
+            r.update_by, r.update_time, r.remark
+        from biz_report r
+    </sql>
+
+    <sql id="selectReportDetailVo">
+        select
+            r.id, r.report_no, r.user_id, r.customer_name, r.customer_phone, r.customer_backup_phone, r.customer_backup_phone3,
+            r.intention_project_id, r.dept_id,
+            r.intention_houses, r.purchased_project_id, r.purchased_houses_id, r.middleman_user_id, r.report_time,
+            r.appointment_time, r.report_validity_time, r.consultant_user_id, r.channel_sys_user_id, r.service_provider_id, r.first_visit_time, r.visit_times,
+            r.customer_rating, r.postpone_status, r.report_status, valid_status, r.status, r.create_by, r.create_time,
+            r.update_by, r.update_time, r.remark,
+            u1.user_name consultantName, p.project_name intentionProject, p1.project_name purchasedProject,
+            d.dept_name deptName, u.user_name middlemanName, u.phone middlemanPhone,
+            h.floor_no, h.unit_no, h.storey_no, h.house_no, su.nick_name channelSysUser,
+            (select organization_name from biz_organization where organization_code = u.organization_code and `status` = '0') middlemanCompany
+        from biz_report r
+            left join sys_dept d on r.dept_id = d.dept_id and d.`status` = '0' and d.del_flag = '0'
+            left join sys_user su on su.user_id = r.channel_sys_user_id and su.`status` = '0' and su.del_flag = '0'
+            left join biz_houses h on r.purchased_houses_id = h.id and h.`status` = '0'
+            left join biz_user u on r.middleman_user_id = u.id and u.`status` = '0'
+            left join biz_user u1 on r.consultant_user_id = u1.id and u1.`status` = '0'
+            left join biz_project p on r.intention_project_id = p.id and p.`status` = '0'
+            left join biz_project p1 on r.purchased_project_id = p1.id and p1.`status` = '0'
+    </sql>
+
+    <sql id="detail_where_if">
+        <if test="reportNo != null  and reportNo != ''"> and r.report_no = #{reportNo}</if>
+        <if test="userId != null "> and r.user_id = #{userId}</if>
+        <if test="customerName != null  and customerName != ''"> and r.customer_name like concat('%', #{customerName}, '%')</if>
+        <if test="customerPhone != null  and customerPhone != ''"> and r.customer_phone = #{customerPhone}</if>
+        <if test="customerBackupPhone != null  and customerBackupPhone != ''"> and r.customer_backup_phone = #{customerBackupPhone}</if>
+        <if test="customerBackupPhone3 != null  and customerBackupPhone3 != ''"> and r.customer_backup_phone3 = #{customerBackupPhone3}</if>
+        <if test="intentionProjectId != null "> and r.intention_project_id = #{intentionProjectId}</if>
+        <if test="deptId != null "> and r.dept_id = #{deptId}</if>
+        <if test="intentionHouses != null  and intentionHouses != ''"> and r.intention_houses = #{intentionHouses}</if>
+        <if test="purchasedProjectId != null "> and r.purchased_project_id = #{purchasedProjectId}</if>
+        <if test="purchasedHousesId != null "> and r.purchased_houses_id = #{purchasedHousesId}</if>
+        <if test="middlemanUserId != null "> and r.middleman_user_id = #{middlemanUserId}</if>
+        <if test="reportTime != null "> and date_format(r.report_time,'%y%m%d') = date_format(#{reportTime},'%y%m%d')</if>
+        <if test="appointmentTime != null "> and r.appointment_time = #{appointmentTime}</if>
+        <if test="reportValidityTime != null "> and r.report_validity_time = #{reportValidityTime}</if>
+        <if test="consultantUserId != null "> and r.consultant_user_id = #{consultantUserId}</if>
+        <if test="channelSysUserId != null "> and r.channel_sys_user_id = #{channelSysUserId}</if>
+        <if test="serviceProviderId != null "> and r.service_provider_id = #{serviceProviderId}</if>
+        <if test="firstVisitTime != null ">and date_format(r.first_visit_time,'%y%m%d') = date_format(#{firstVisitTime},'%y%m%d')</if>
+        <if test="visitTimes != null "> and r.visit_times = #{visitTimes}</if>
+        <if test="customerRating != null  and customerRating != ''"> and r.customer_rating = #{customerRating}</if>
+        <if test="postponeStatus != null  and postponeStatus != ''"> and r.postpone_status = #{postponeStatus}</if>
+        <if test="reportStatus != null  and reportStatus != ''"> and r.report_status = #{reportStatus}</if>
+        <if test="validStatus != null  and validStatus != ''"> and r.valid_status = #{validStatus}</if>
+        <if test="status != null  and status != ''"> and r.status = #{status}</if>
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            and date_format(r.report_time,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            and date_format(r.report_time,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+        </if>
+        <if test="tempTime != null ">and date_format(r.report_time,'%y%m') = date_format(#{tempTime},'%y%m')</if>
+    </sql>
+
+    <select id="selectReportDetail" parameterType="BizReport" resultMap="BizReportVoResult">
+        <include refid="selectReportDetailVo"/>
+        <where>
+            <include refid="detail_where_if"/>
+        </where>
+        order by r.create_time desc
+    </select>
+
+    <select id="selectBizReportList" parameterType="BizReport" resultMap="BizReportResult">
+        <include refid="selectBizReportVo"/>
+        <where>
+            <include refid="detail_where_if"/>
+        </where>
+        order by r.create_time desc
+    </select>
+
+    <select id="selectByConsultantUsers" parameterType="BizReport" resultMap="BizReportVoResult">
+        <include refid="selectReportDetailVo"/>
+        where r.consultant_user_id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <include refid="detail_where_if"/>
+    </select>
+
+    <select id="selectByMiddlemanUsers" parameterType="BizReport" resultMap="BizReportVoResult">
+        <include refid="selectReportDetailVo"/>
+          where r.middleman_user_id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <include refid="detail_where_if"/>
+    </select>
+
+    <select id="selectBizReportById" parameterType="Integer" resultMap="BizReportVoResult">
+        <include refid="selectReportDetailVo"/>
+        where r.id = #{id}
+    </select>
+
+    <select id="selectByConsultantUserId" parameterType="Integer" resultMap="BizReportVoResult">
+        <include refid="selectReportDetailVo"/>
+        where r.report_status != '6' and r.consultant_user_id = #{consultantUserId}
+    </select>
+
+    <select id="selectProtectReport" parameterType="BizReport" resultMap="BizReportResult">
+        <include refid="selectBizReportVo"/>
+        where r.intention_project_id = #{intentionProjectId}
+        and r.report_validity_time > current_timestamp
+        and r.valid_status = '0'
+        and (
+            r.customer_phone = #{customerPhone} or r.customer_backup_phone = #{customerPhone} or r.customer_backup_phone3 = #{customerPhone}
+        <if test="customerBackupPhone != null  and customerBackupPhone != ''">
+            or r.customer_phone = #{customerBackupPhone}
+            or r.customer_backup_phone = #{customerBackupPhone}
+            or r.customer_backup_phone3 = #{customerBackupPhone}
+        </if>
+        <if test="customerBackupPhone3 != null  and customerBackupPhone3 != ''">
+            or r.customer_phone = #{customerBackupPhone3}
+            or r.customer_backup_phone = #{customerBackupPhone3}
+            or r.customer_backup_phone3 = #{customerBackupPhone3}
+        </if>
+        )
+        <if test="id != null"> and r.id != #{id}</if>
+    </select>
+
+    <select id="selectBizReportByReportNo" parameterType="String" resultMap="BizReportResult">
+        <include refid="selectBizReportVo"/>
+        where r.report_no = #{reportNo}
+    </select>
+
+    <select id="selectOvertimeReport" resultMap="BizReportResult">
+        <include refid="selectBizReportVo"/>
+        where DATEDIFF(CURRENT_DATE, r.report_time) > 30 and r.valid_status = '0' and (select user_role from biz_user where login_name=#{middlemanUserId}) != '4'
+        and (select organization_code from biz_user where login_name=#{middlemanUserId}) != 'A_000000001'
+    </select>
+
+    <insert id="insertBizReport" parameterType="BizReport" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reportNo != null and reportNo != ''">report_no,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="customerName != null and customerName != ''">customer_name,</if>
+            <if test="customerPhone != null and customerPhone != ''">customer_phone,</if>
+            <if test="customerBackupPhone != null and customerBackupPhone != ''">customer_backup_phone,</if>
+            <if test="customerBackupPhone3 != null and customerBackupPhone3 != ''">customer_backup_phone3,</if>
+            <if test="intentionProjectId != null">intention_project_id,</if>
+            <if test="deptId != null ">dept_id,</if>
+            <if test="intentionHouses != null">intention_houses,</if>
+            <if test="purchasedProjectId != null">purchased_project_id,</if>
+            <if test="purchasedHousesId != null">purchased_houses_id,</if>
+            <if test="middlemanUserId != null">middleman_user_id,</if>
+            <if test="reportTime != null">report_time,</if>
+            <if test="appointmentTime != null">appointment_time,</if>
+            <if test="reportValidityTime != null">report_validity_time,</if>
+            <if test="consultantUserId != null">consultant_user_id,</if>
+            <if test="channelSysUserId != null">channel_sys_user_id,</if>
+            <if test="serviceProviderId != null">service_provider_id,</if>
+            <if test="firstVisitTime != null">first_visit_time,</if>
+            <if test="visitTimes != null">visit_times,</if>
+            <if test="customerRating != null">customer_rating,</if>
+            <if test="postponeStatus != null and postponeStatus != ''">postpone_status,</if>
+            <if test="reportStatus != null and reportStatus != ''">report_status,</if>
+            <if test="validStatus != null and validStatus != ''">valid_status,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reportNo != null and reportNo != ''">#{reportNo},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="customerName != null and customerName != ''">#{customerName},</if>
+            <if test="customerPhone != null and customerPhone != ''">#{customerPhone},</if>
+            <if test="customerBackupPhone != null and customerBackupPhone != ''">#{customerBackupPhone},</if>
+            <if test="customerBackupPhone3 != null and customerBackupPhone3 != ''">#{customerBackupPhone3},</if>
+            <if test="intentionProjectId != null">#{intentionProjectId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="intentionHouses != null">#{intentionHouses},</if>
+            <if test="purchasedProjectId != null">#{purchasedProjectId},</if>
+            <if test="purchasedHousesId != null">#{purchasedHousesId},</if>
+            <if test="middlemanUserId != null">#{middlemanUserId},</if>
+            <if test="reportTime != null">#{reportTime},</if>
+            <if test="appointmentTime != null">#{appointmentTime},</if>
+            <if test="reportValidityTime != null">#{reportValidityTime},</if>
+            <if test="consultantUserId != null">#{consultantUserId},</if>
+            <if test="channelSysUserId != null">#{channelSysUserId},</if>
+            <if test="serviceProviderId != null">#{serviceProviderId},</if>
+            <if test="firstVisitTime != null">#{firstVisitTime},</if>
+            <if test="visitTimes != null">#{visitTimes},</if>
+            <if test="customerRating != null">#{customerRating},</if>
+            <if test="postponeStatus != null and postponeStatus != ''">#{postponeStatus},</if>
+            <if test="reportStatus != null and reportStatus != ''">#{reportStatus},</if>
+            <if test="validStatus != null and validStatus != ''">#{validStatus},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizReport" parameterType="BizReport">
+        update biz_report
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="reportNo != null and reportNo != ''">report_no = #{reportNo},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="customerName != null and customerName != ''">customer_name = #{customerName},</if>
+            <if test="customerPhone != null and customerPhone != ''">customer_phone = #{customerPhone},</if>
+            <if test="customerBackupPhone != null and customerBackupPhone != ''">customer_backup_phone = #{customerBackupPhone},</if>
+            <if test="customerBackupPhone3 != null and customerBackupPhone3 != ''">customer_backup_phone3 = #{customerBackupPhone3},</if>
+            <if test="intentionProjectId != null">intention_project_id = #{intentionProjectId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="intentionHouses != null">intention_houses = #{intentionHouses},</if>
+            <if test="purchasedProjectId != null">purchased_project_id = #{purchasedProjectId},</if>
+            <if test="purchasedHousesId != null">purchased_houses_id = #{purchasedHousesId},</if>
+            <if test="middlemanUserId != null">middleman_user_id = #{middlemanUserId},</if>
+            <if test="reportTime != null">report_time = #{reportTime},</if>
+            <if test="appointmentTime != null">appointment_time = #{appointmentTime},</if>
+            <if test="reportValidityTime != null">report_validity_time = #{reportValidityTime},</if>
+            <if test="consultantUserId != null">consultant_user_id = #{consultantUserId},</if>
+            <if test="channelSysUserId != null">channel_sys_user_id = #{channelSysUserId},</if>
+            <if test="serviceProviderId != null">service_provider_id = #{serviceProviderId},</if>
+            <if test="firstVisitTime != null">first_visit_time = #{firstVisitTime},</if>
+            <if test="visitTimes != null">visit_times = #{visitTimes},</if>
+            <if test="customerRating != null">customer_rating = #{customerRating},</if>
+            <if test="postponeStatus != null and postponeStatus != ''">postpone_status = #{postponeStatus},</if>
+            <if test="reportStatus != null and reportStatus != ''">report_status = #{reportStatus},</if>
+            <if test="validStatus != null and validStatus != ''">valid_status = #{validStatus},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizReportById" parameterType="Integer">
+        delete from biz_report where id = #{id}
+    </delete>
+
+    <delete id="deleteBizReportByIds" parameterType="String">
+        delete from biz_report where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateBizReportDelStatus" parameterType="String">
+        update biz_report set status = 1 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateBizReportConsultant">
+        update biz_report set consultant_user_id = #{newConsultantUserId} where consultant_user_id = #{originalConsultantUserId} and report_no = #{reportNo}
+    </update>
+
+    <update id="updateAddVisitTime" parameterType="String">
+        update biz_report set visit_times = IFNULL(visit_times, 0) + 1 where report_no = #{reportNo}
+    </update>
+
+
+    <update id="updateOutOfAppointmentTime" parameterType="String">
+        update biz_report set valid_status = 1 where TIMESTAMPDIFF(HOUR, report_time, CURRENT_TIMESTAMP) >= 24 and valid_status = '0'
+        and report_status = '0'
+    </update>
+
+    <update id="updateOutOfSelfTime" parameterType="String">
+        update biz_report set valid_status = 1 where dept_id='A_000000001' and DATEDIFF(CURRENT_DATE, r.report_time) >= 7 and valid_status = '0'
+                                                 and report_status = '0'
+    </update>
+</mapper>

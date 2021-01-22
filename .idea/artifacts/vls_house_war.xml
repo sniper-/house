@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="vls-house:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>vls-house</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="vls-house.war">
+      <element id="artifact" artifact-name="vls-house:war exploded" />
+    </root>
+  </artifact>
+</component>

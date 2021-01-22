@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.project.business.mapper.BizProjectMapper">
+    
+    <resultMap type="BizProject" id="BizProjectResult">
+        <result property="id"    column="id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="openDate"    column="open_date"    />
+        <result property="projectProvince"    column="project_province"    />
+        <result property="projectCity"    column="project_city"    />
+        <result property="projectAddress"    column="project_address"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="propertyType"    column="property_type"    />
+        <result property="buildingTypes"    column="building_types"    />
+        <result property="greeningRate"    column="greening_rate"    />
+        <result property="volumeRate"    column="volume_rate"    />
+        <result property="floorSpace"    column="floor_space"    />
+        <result property="buildingSpace"    column="building_space"    />
+        <result property="propertyAgeLimit"    column="property_age_limit"    />
+        <result property="programmeHouseholds"    column="programme_households"    />
+        <result property="projectAveragePrice"    column="project_average_price"    />
+        <result property="projectSumPrice"    column="project_sum_price"    />
+        <result property="realEstateCertificate"    column="real_estate_certificate"    />
+        <result property="preSaleLicense"    column="pre_sale_license"    />
+        <result property="salesOfficeAddress"    column="sales_office_address"    />
+        <result property="receptionTime"    column="reception_time"    />
+        <result property="projectFeatures"    column="project_features"    />
+        <result property="waterSupplyType"    column="water_supply_type"    />
+        <result property="naturalGas"    column="natural_gas"    />
+        <result property="heatingType"    column="heating_type"    />
+        <result property="poweredType"    column="powered_type"    />
+        <result property="subwayStation"    column="subway_station"    />
+        <result property="parkingSpace"    column="parking_space"    />
+        <result property="parkingSpaceScale"    column="parking_space_scale"    />
+        <result property="propertyCosts"    column="property_costs"    />
+        <result property="developer"    column="developer"    />
+        <result property="propertyCompany"    column="property_company"    />
+        <result property="matching"    column="matching"    />
+        <result property="propertyNews"    column="property_news"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBizProjectVo">
+        select id, project_name, open_date, project_province, project_city, project_address, project_status, property_type, building_types, greening_rate, volume_rate, floor_space, building_space, property_age_limit, programme_households, project_average_price, project_sum_price, real_estate_certificate, pre_sale_license, sales_office_address, reception_time, project_features, water_supply_type, natural_gas, heating_type, powered_type, subway_station, parking_space, parking_space_scale, property_costs, developer, property_company, matching, property_news, order_num, status, create_by, create_time, update_by, update_time, remark from biz_project
+    </sql>
+
+    <select id="selectBizProjectList" parameterType="BizProject" resultMap="BizProjectResult">
+        <include refid="selectBizProjectVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="openDate != null  and openDate != ''"> and open_date = #{openDate}</if>
+            <if test="projectProvince != null  and projectProvince != ''"> and project_province = #{projectProvince}</if>
+            <if test="projectCity != null  and projectCity != ''"> and project_city = #{projectCity}</if>
+            <if test="projectAddress != null  and projectAddress != ''"> and project_address = #{projectAddress}</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="propertyType != null  and propertyType != ''"> and property_type = #{propertyType}</if>
+            <if test="buildingTypes != null  and buildingTypes != ''"> and building_types = #{buildingTypes}</if>
+            <if test="greeningRate != null "> and greening_rate = #{greeningRate}</if>
+            <if test="volumeRate != null "> and volume_rate = #{volumeRate}</if>
+            <if test="floorSpace != null  and floorSpace != ''"> and floor_space = #{floorSpace}</if>
+            <if test="buildingSpace != null  and buildingSpace != ''"> and building_space = #{buildingSpace}</if>
+            <if test="propertyAgeLimit != null  and propertyAgeLimit != ''"> and property_age_limit = #{propertyAgeLimit}</if>
+            <if test="programmeHouseholds != null  and programmeHouseholds != ''"> and programme_households = #{programmeHouseholds}</if>
+            <if test="projectAveragePrice != null "> and project_average_price = #{projectAveragePrice}</if>
+            <if test="projectSumPrice != null  and projectSumPrice != ''"> and project_sum_price = #{projectSumPrice}</if>
+            <if test="realEstateCertificate != null  and realEstateCertificate != ''"> and real_estate_certificate = #{realEstateCertificate}</if>
+            <if test="preSaleLicense != null  and preSaleLicense != ''"> and pre_sale_license = #{preSaleLicense}</if>
+            <if test="salesOfficeAddress != null  and salesOfficeAddress != ''"> and sales_office_address = #{salesOfficeAddress}</if>
+            <if test="receptionTime != null  and receptionTime != ''"> and reception_time = #{receptionTime}</if>
+            <if test="projectFeatures != null  and projectFeatures != ''"> and project_features = #{projectFeatures}</if>
+            <if test="waterSupplyType != null  and waterSupplyType != ''"> and water_supply_type = #{waterSupplyType}</if>
+            <if test="naturalGas != null  and naturalGas != ''"> and natural_gas = #{naturalGas}</if>
+            <if test="heatingType != null  and heatingType != ''"> and heating_type = #{heatingType}</if>
+            <if test="poweredType != null  and poweredType != ''"> and powered_type = #{poweredType}</if>
+            <if test="subwayStation != null  and subwayStation != ''"> and subway_station = #{subwayStation}</if>
+            <if test="parkingSpace != null  and parkingSpace != ''"> and parking_space = #{parkingSpace}</if>
+            <if test="parkingSpaceScale != null  and parkingSpaceScale != ''"> and parking_space_scale = #{parkingSpaceScale}</if>
+            <if test="propertyCosts != null  and propertyCosts != ''"> and property_costs = #{propertyCosts}</if>
+            <if test="developer != null  and developer != ''"> and developer = #{developer}</if>
+            <if test="propertyCompany != null  and propertyCompany != ''"> and property_company = #{propertyCompany}</if>
+            <if test="matching != null  and matching != ''"> and matching = #{matching}</if>
+            <if test="propertyNews != null  and propertyNews != ''"> and property_news = #{propertyNews}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="heightPrice != null "> and project_average_price  <![CDATA[ <= ]]> #{heightPrice}</if>
+            <if test="lowPrice != null "> and project_average_price >= #{lowPrice}</if>
+        </where>
+        order by order_num
+    </select>
+    
+    <select id="selectBizProjectById" parameterType="Integer" resultMap="BizProjectResult">
+        <include refid="selectBizProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBizProject" parameterType="BizProject" useGeneratedKeys="true" keyProperty="id">
+        insert into biz_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="openDate != null">open_date,</if>
+            <if test="projectProvince != null">project_province,</if>
+            <if test="projectCity != null">project_city,</if>
+            <if test="projectAddress != null">project_address,</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status,</if>
+            <if test="propertyType != null">property_type,</if>
+            <if test="buildingTypes != null">building_types,</if>
+            <if test="greeningRate != null">greening_rate,</if>
+            <if test="volumeRate != null">volume_rate,</if>
+            <if test="floorSpace != null">floor_space,</if>
+            <if test="buildingSpace != null">building_space,</if>
+            <if test="propertyAgeLimit != null">property_age_limit,</if>
+            <if test="programmeHouseholds != null">programme_households,</if>
+            <if test="projectAveragePrice != null">project_average_price,</if>
+            <if test="projectSumPrice != null">project_sum_price,</if>
+            <if test="realEstateCertificate != null">real_estate_certificate,</if>
+            <if test="preSaleLicense != null">pre_sale_license,</if>
+            <if test="salesOfficeAddress != null">sales_office_address,</if>
+            <if test="receptionTime != null">reception_time,</if>
+            <if test="projectFeatures != null">project_features,</if>
+            <if test="waterSupplyType != null">water_supply_type,</if>
+            <if test="naturalGas != null">natural_gas,</if>
+            <if test="heatingType != null">heating_type,</if>
+            <if test="poweredType != null">powered_type,</if>
+            <if test="subwayStation != null">subway_station,</if>
+            <if test="parkingSpace != null">parking_space,</if>
+            <if test="parkingSpaceScale != null">parking_space_scale,</if>
+            <if test="propertyCosts != null">property_costs,</if>
+            <if test="developer != null">developer,</if>
+            <if test="propertyCompany != null">property_company,</if>
+            <if test="matching != null">matching,</if>
+            <if test="propertyNews != null">property_news,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="openDate != null">#{openDate},</if>
+            <if test="projectProvince != null">#{projectProvince},</if>
+            <if test="projectCity != null">#{projectCity},</if>
+            <if test="projectAddress != null">#{projectAddress},</if>
+            <if test="projectStatus != null and projectStatus != ''">#{projectStatus},</if>
+            <if test="propertyType != null">#{propertyType},</if>
+            <if test="buildingTypes != null">#{buildingTypes},</if>
+            <if test="greeningRate != null">#{greeningRate},</if>
+            <if test="volumeRate != null">#{volumeRate},</if>
+            <if test="floorSpace != null">#{floorSpace},</if>
+            <if test="buildingSpace != null">#{buildingSpace},</if>
+            <if test="propertyAgeLimit != null">#{propertyAgeLimit},</if>
+            <if test="programmeHouseholds != null">#{programmeHouseholds},</if>
+            <if test="projectAveragePrice != null">#{projectAveragePrice},</if>
+            <if test="projectSumPrice != null">#{projectSumPrice},</if>
+            <if test="realEstateCertificate != null">#{realEstateCertificate},</if>
+            <if test="preSaleLicense != null">#{preSaleLicense},</if>
+            <if test="salesOfficeAddress != null">#{salesOfficeAddress},</if>
+            <if test="receptionTime != null">#{receptionTime},</if>
+            <if test="projectFeatures != null">#{projectFeatures},</if>
+            <if test="waterSupplyType != null">#{waterSupplyType},</if>
+            <if test="naturalGas != null">#{naturalGas},</if>
+            <if test="heatingType != null">#{heatingType},</if>
+            <if test="poweredType != null">#{poweredType},</if>
+            <if test="subwayStation != null">#{subwayStation},</if>
+            <if test="parkingSpace != null">#{parkingSpace},</if>
+            <if test="parkingSpaceScale != null">#{parkingSpaceScale},</if>
+            <if test="propertyCosts != null">#{propertyCosts},</if>
+            <if test="developer != null">#{developer},</if>
+            <if test="propertyCompany != null">#{propertyCompany},</if>
+            <if test="matching != null">#{matching},</if>
+            <if test="propertyNews != null">#{propertyNews},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizProject" parameterType="BizProject">
+        update biz_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="openDate != null">open_date = #{openDate},</if>
+            <if test="projectProvince != null">project_province = #{projectProvince},</if>
+            <if test="projectCity != null">project_city = #{projectCity},</if>
+            <if test="projectAddress != null">project_address = #{projectAddress},</if>
+            <if test="projectStatus != null and projectStatus != ''">project_status = #{projectStatus},</if>
+            <if test="propertyType != null">property_type = #{propertyType},</if>
+            <if test="buildingTypes != null">building_types = #{buildingTypes},</if>
+            <if test="greeningRate != null">greening_rate = #{greeningRate},</if>
+            <if test="volumeRate != null">volume_rate = #{volumeRate},</if>
+            <if test="floorSpace != null">floor_space = #{floorSpace},</if>
+            <if test="buildingSpace != null">building_space = #{buildingSpace},</if>
+            <if test="propertyAgeLimit != null">property_age_limit = #{propertyAgeLimit},</if>
+            <if test="programmeHouseholds != null">programme_households = #{programmeHouseholds},</if>
+            <if test="projectAveragePrice != null">project_average_price = #{projectAveragePrice},</if>
+            <if test="projectSumPrice != null">project_sum_price = #{projectSumPrice},</if>
+            <if test="realEstateCertificate != null">real_estate_certificate = #{realEstateCertificate},</if>
+            <if test="preSaleLicense != null">pre_sale_license = #{preSaleLicense},</if>
+            <if test="salesOfficeAddress != null">sales_office_address = #{salesOfficeAddress},</if>
+            <if test="receptionTime != null">reception_time = #{receptionTime},</if>
+            <if test="projectFeatures != null">project_features = #{projectFeatures},</if>
+            <if test="waterSupplyType != null">water_supply_type = #{waterSupplyType},</if>
+            <if test="naturalGas != null">natural_gas = #{naturalGas},</if>
+            <if test="heatingType != null">heating_type = #{heatingType},</if>
+            <if test="poweredType != null">powered_type = #{poweredType},</if>
+            <if test="subwayStation != null">subway_station = #{subwayStation},</if>
+            <if test="parkingSpace != null">parking_space = #{parkingSpace},</if>
+            <if test="parkingSpaceScale != null">parking_space_scale = #{parkingSpaceScale},</if>
+            <if test="propertyCosts != null">property_costs = #{propertyCosts},</if>
+            <if test="developer != null">developer = #{developer},</if>
+            <if test="propertyCompany != null">property_company = #{propertyCompany},</if>
+            <if test="matching != null">matching = #{matching},</if>
+            <if test="propertyNews != null">property_news = #{propertyNews},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizProjectById" parameterType="Integer">
+        delete from biz_project where id = #{id}
+    </delete>
+
+    <delete id="deleteBizProjectByIds" parameterType="String">
+        delete from biz_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
